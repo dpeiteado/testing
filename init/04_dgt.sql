@@ -79,3 +79,19 @@ CREATE TABLE vehiculo (
                 OR fechaimportacion IS NOT NULL )
 )
 TABLESPACE dgt_data;
+
+
+-- TABLA AUXILIAR PARA LA GENERACIÓN DE MATRICULAS
+CREATE TABLE matricula_letras (
+    letras VARCHAR2(3) PRIMARY KEY
+)TABLESPACE dgt_data;
+
+INSERT INTO matricula_letras VALUES ('AAA');
+COMMIT;
+SELECT * FROM matricula_letras;
+
+
+
+
+
+COMMIT;
