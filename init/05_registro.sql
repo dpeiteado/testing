@@ -56,6 +56,21 @@ CREATE TABLE etiquetaambiental (
 )
 TABLESPACE dgt_data;
 
+
+-- 2. TABLA DE ESTADO
+CREATE TABLE matricula_estado (
+    id NUMBER PRIMARY KEY CHECK (id = 1),
+    letras VARCHAR2(3) NOT NULL,
+    inicializado NUMBER(1) DEFAULT 0 NOT NULL
+)
+TABLESPACE dgt_data;
+
+INSERT INTO matricula_estado (id, letras, inicializado)
+VALUES (1, 'AAA', 0);
+
+
+
+
 CREATE TABLE vehiculo (
     idvehiculo              NUMBER
         GENERATED ALWAYS AS IDENTITY
@@ -79,19 +94,6 @@ CREATE TABLE vehiculo (
                 OR fechaimportacion IS NOT NULL )
 )
 TABLESPACE dgt_data;
-
-
--- TABLA AUXILIAR PARA LA GENERACIÓN DE MATRICULAS
-CREATE TABLE matricula_letras (
-    letras VARCHAR2(3) PRIMARY KEY
-)TABLESPACE dgt_data;
-
-INSERT INTO matricula_letras VALUES ('AAA');
-COMMIT;
-SELECT * FROM matricula_letras;
-
-
-
 
 
 COMMIT;
