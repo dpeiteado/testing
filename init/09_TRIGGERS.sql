@@ -11,27 +11,26 @@ DECLARE
     v_num NUMBER;
     v_letras VARCHAR2(3);
 BEGIN
-    -- 1. Obtener número
+    -- 1. Obtener número de la secuencia
     v_num := dgt_admin.seq_num_matricula.NEXTVAL;
 
-    -- 2. Bloquear y leer letras actuales
-    SELECT letras
-    INTO v_letras
-    FROM matricula_letras
+    -- 2. Leer letras actuales (SIN modificarlas aún)
+    SELECT letras INTO v_letras
+    FROM dgt_admin.matricula_letras
     WHERE id = 1
     FOR UPDATE;
 
-    -- 3. Si la secuencia ha ciclado → cambiar letras
-    IF v_num = 1 THEN
-        v_letras := siguiente_letras(v_letras);
+    -- 3. Generar la matrícula con las letras actuales
+    :NEW.matricula := LPAD(v_num, 4, '0') || v_letras;
 
-        UPDATE matricula_letras
+    -- 4. SI EL NÚMERO ES EL MÁXIMO (9999), preparamos las letras para el PRÓXIMO insert
+    IF v_num = 9999 THEN
+        v_letras := dgt_admin.siguiente_letras(v_letras);
+        
+        UPDATE dgt_admin.matricula_letras
         SET letras = v_letras
         WHERE id = 1;
     END IF;
-
-    -- 4. Generar matrícula
-    :NEW.matricula := LPAD(v_num, 4, '0') || v_letras;
 END;
 /
 
