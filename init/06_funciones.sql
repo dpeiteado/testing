@@ -1,7 +1,7 @@
 ALTER SESSION SET CONTAINER = FREEPDB1;
 ALTER SESSION SET CURRENT_SCHEMA = dgt_admin;
 
--- 3. Función para incrementar letras
+-- Función para incrementar letras
 CREATE OR REPLACE FUNCTION siguiente_letras(p_letras VARCHAR2)
 RETURN VARCHAR2
 IS
@@ -24,6 +24,7 @@ BEGIN
             IF l1 < 'Z' THEN
                 l1 := CHR(ASCII(l1) + 1);
             ELSE
+                -- opcional: límite máximo alcanzado
                 RAISE_APPLICATION_ERROR(-20001, 'Límite de matrículas alcanzado (ZZZ)');
             END IF;
         END IF;
@@ -32,3 +33,6 @@ BEGIN
     RETURN l1 || l2 || l3;
 END;
 /
+-- Permisos y Sinónimos inmediatos
+GRANT EXECUTE ON siguiente_letras TO PUBLIC;
+CREATE OR REPLACE PUBLIC SYNONYM siguiente_letras FOR dgt_admin.siguiente_letras;

@@ -2,28 +2,27 @@
 ALTER SESSION SET CONTAINER = FREEPDB1;
 ALTER SESSION SET CURRENT_SCHEMA = dgt_admin;
 
-
-
 --INSERTAR COMUNIDADES AUTONOMAS
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Andalucía', 1.02);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Aragón', 1.3);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Andalucía', 1.03);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Aragón', 1.9);
 INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Asturias', 1.02);
 INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Islas Baleares', 1.07);
 INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Canarias', 1.03);
 INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Cantabria', 1.03);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Castilla-La Mancha', 1.03);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Castilla y León', 1.2);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Castilla-La Mancha', 1.04);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Castilla y León', 1.04);
 INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Cataluña', 1.05);
 INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Comunidad Valenciana', 1.07);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Extremadura', 1.02);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Extremadura', 1.06);
 INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Galicia', 1.03);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Comunidad de Madrid', 1.07);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Región de Murcia', 1.03);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Navarra', 1.07);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('País Vasco', 1.07);
-INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('La Rioja', 1.03);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Comunidad de Madrid', 1.23);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Región de Murcia', 1.06);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('Navarra', 1.09);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('País Vasco', 1.08);
+INSERT INTO comunidadautonoma (nombre, f_ccaa) VALUES ('La Rioja', 1.07);
 
---PROVINCIAS
+-- INSERTAR PARA PROVINCIAS
+
 -- Andalucía (1)
 INSERT INTO provincia (idccaa,nombre) VALUES (1,'Almería');
 INSERT INTO provincia (idccaa,nombre) VALUES (1,'Cádiz');
@@ -109,7 +108,7 @@ INSERT INTO provincia (idccaa,nombre) VALUES (16,'Vizcaya');
 INSERT INTO provincia (idccaa,nombre) VALUES (17,'La Rioja');
 
 
---Municipios
+-- INSERTAR MUNICIPIOS
 INSERT INTO municipio (idprovincia, nombre)
 VALUES (40, 'Santiago de Compostela');
 
@@ -129,13 +128,19 @@ INSERT INTO municipio (idprovincia, nombre)
 VALUES (12, 'Gijón');
 
 INSERT INTO municipio (idprovincia, nombre)
+VALUES (13, 'Manacor');
+
+INSERT INTO municipio (idprovincia, nombre)
+VALUES (29, 'Medina del Campo');
+
+INSERT INTO municipio (idprovincia, nombre)
 VALUES (31, 'Badalona');
 
 INSERT INTO municipio (idprovincia, nombre)
 VALUES (40, 'Ferrol');
 
 
---Etiquetas ambientales
+-- ETIQUETA AMBIENTAL
 INSERT INTO EtiquetaAmbiental (codigo)
 VALUES ('0');
 
@@ -151,9 +156,8 @@ VALUES ('B');
 INSERT INTO EtiquetaAmbiental (codigo)
 VALUES ('SIN ETIQUETA');
 
--- VEHÍCULOS
+
+INSERT INTO matricula_letras (id, letras) VALUES (1, 'AAA');
 
 
-
---COMMIT
 COMMIT;
