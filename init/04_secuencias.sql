@@ -8,6 +8,12 @@ CREATE SEQUENCE seq_num_matricula
     CYCLE
     NOCACHE;
 
+
+
+/*
+--TESTEO PARA LOCALIZAR ERROR PARECE SEGUIR FUNCIONANANDO
 -- Permisos y Sinónimos inmediatos
 GRANT SELECT ON seq_num_matricula TO PUBLIC;
 CREATE OR REPLACE PUBLIC SYNONYM seq_num_matricula FOR dgt_admin.seq_num_matricula;
+
+*/

@@ -33,6 +33,9 @@ BEGIN
     RETURN l1 || l2 || l3;
 END;
 /
+/*
 -- Permisos y Sinónimos inmediatos
 GRANT EXECUTE ON siguiente_letras TO PUBLIC;
 CREATE OR REPLACE PUBLIC SYNONYM siguiente_letras FOR dgt_admin.siguiente_letras;
+
+*/

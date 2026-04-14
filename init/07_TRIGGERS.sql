@@ -36,5 +36,5 @@ END;
 
 
 
--- Verificación de errores automática en el log de Docker
-SHOW ERRORS TRIGGER dgt_admin.trg_matricula;
+-- ERRORES
+--SHOW ERRORS TRIGGER dgt_admin.trg_matricula;

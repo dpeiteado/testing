@@ -1,9 +1,33 @@
 ALTER SESSION SET CONTAINER = FREEPDB1;
+
+
 -- ROLES
 CREATE ROLE rol_agente;
 CREATE ROLE rol_funcionario;
 CREATE ROLE rol_analista;
+CREATE ROLE rol_desarrollo;
+
+-- PERMISOS PARA LOS ROLES
+GRANT CONNECT TO rol_agente, rol_funcionario, rol_analista, rol_desarrollo;
+GRANT CREATE TABLE, CREATE VIEW, CREATE PROCEDURE, CREATE SEQUENCE, CREATE TRIGGER, CREATE TYPE, CREATE SYNONYM, CREATE PUBLIC SYNONYM, DROP PUBLIC SYNONYM TO rol_desarrollo;
+
+-- USUARIOS PRINCIPALES DEL SISTEMA
+CREATE USER agente_gc01 IDENTIFIED BY 1234;
+CREATE USER funcionario01 IDENTIFIED BY 1234;
+CREATE USER analista01 IDENTIFIED BY 1234;
+CREATE USER dgt_admin IDENTIFIED BY uoc;
+
+-- ASIGNACIÓN DE ROLES A LOS USUARIOS
+GRANT rol_agente TO agente_gc01;
+GRANT rol_funcionario TO funcionario01;
+GRANT rol_analista TO analista01;
+GRANT rol_desarrollo TO dgt_admin;
+
+-- ASIGNACIÓN DE PERMISOS A DGT_ADMIN
+ALTER USER dgt_admin QUOTA UNLIMITED ON dgt_data;
+ALTER USER dgt_admin QUOTA UNLIMITED ON dgt_index;
+ALTER USER dgt_admin QUOTA UNLIMITED ON dgt_log;
+ALTER USER dgt_admin QUOTA UNLIMITED ON dgt_dw;
 
 
-GRANT CREATE SESSION TO rol_agente, rol_funcionario, rol_analista;
 
