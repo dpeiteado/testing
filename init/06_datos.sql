@@ -201,6 +201,10 @@ VALUES (201, 999, 1.30);
 
 
 
+INSERT INTO EstadoExpediente (descripcion) VALUES ('PENDIENTE');
+INSERT INTO EstadoExpediente (descripcion) VALUES ('COMPLETADO');
+INSERT INTO EstadoExpediente (descripcion) VALUES ('ANULADO');
+INSERT INTO EstadoExpediente (descripcion) VALUES ('BAJA DEFINITIVA');
 
 
 COMMIT;

@@ -160,4 +160,38 @@ CREATE TABLE Emisiones (
 
 
 
+--
+CREATE TABLE estadoexpediente (
+    idestadoexp NUMBER
+        GENERATED ALWAYS AS IDENTITY
+        CONSTRAINT pk_estadoexp PRIMARY KEY,
+    descripcion VARCHAR2(50) NOT NULL
+        CONSTRAINT uq_estadoexp_desc UNIQUE
+)
+TABLESPACE dgt_data;
+
+
+
+
+CREATE TABLE Expediente (
+    idExpediente NUMBER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_expediente PRIMARY KEY,
+    fechaInicio DATE NOT NULL,
+    fechaFinalizacion DATE,
+    idVehiculo NUMBER NOT NULL,
+    idEstadoExp NUMBER DEFAULT 1 NOT NULL,
+    CONSTRAINT fk_expediente_vehiculo FOREIGN KEY (idVehiculo) REFERENCES Vehiculo(idVehiculo),
+    CONSTRAINT fk_expediente_estado FOREIGN KEY (idEstadoExp) REFERENCES EstadoExpediente(idEstadoExp),
+    CONSTRAINT uq_expediente_vehiculo UNIQUE (idVehiculo)
+) TABLESPACE dgt_data;
+
+
+CREATE TABLE HistoricoEstados (
+    idHistorico NUMBER GENERATED ALWAYS AS IDENTITY CONSTRAINT pk_historico_estados PRIMARY KEY,
+    idExpediente NUMBER NOT NULL,
+    fechaCambio DATE NOT NULL,
+    idEstadoExp NUMBER NOT NULL,
+    CONSTRAINT fk_hist_exp FOREIGN KEY (idExpediente) REFERENCES Expediente(idExpediente),
+    CONSTRAINT fk_hist_estado FOREIGN KEY (idEstadoExp) REFERENCES EstadoExpediente(idEstadoExp)
+) TABLESPACE dgt_data;
+
 
