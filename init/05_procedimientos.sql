@@ -1447,9 +1447,10 @@ CREATE OR REPLACE PROCEDURE sp_procesar_matriculacion (
     p_telefono                    IN VARCHAR2,
     p_email                       IN VARCHAR2,
     p_es_juridica                 IN NUMBER,
-    p_nombre                      IN VARCHAR2,
-    p_apellido1                   IN VARCHAR2,
-    p_apellido2                   IN VARCHAR2,
+    p_nombre                      IN VARCHAR2 DEFAULT NULL,
+    p_apellido1                   IN VARCHAR2 DEFAULT NULL,
+    p_apellido2                   IN VARCHAR2 DEFAULT NULL,
+    p_razon_social                IN VARCHAR2 DEFAULT NULL,
     p_id_jefatura                 IN NUMBER,
     p_out_id_expediente           OUT NUMBER,
     p_out_matricula               OUT VARCHAR2
@@ -1506,31 +1507,23 @@ BEGIN
         p_out_id_emisiones    => v_id_emisiones
     );
 
-    -- VERIFICACIÓN TÉCNICA
-    sp_verificar_requisitos_matriculacion(p_id_vehiculo => v_id_vehiculo);
-
     -- TITULAR
-    -- Buscar si la persona ya existe, si no, crearla.
-    BEGIN
-        SELECT id_persona INTO v_id_persona 
-        FROM persona 
-        WHERE numero_documento = p_dni AND id_tipo_documento = p_id_tipo_documento;
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            sp_registrar_persona(
-                p_numero_documento  => p_dni,
-                p_id_tipo_documento => p_id_tipo_documento, 
-                p_id_municipio      => p_id_municipio, 
-                p_direccion         => p_direccion,
-                p_telefono          => p_telefono,
-                p_email             => p_email,
-                p_es_juridica       => p_es_juridica, 
-                p_nombre            => p_nombre,
-                p_apellido1         => p_apellido1,
-                p_apellido2         => p_apellido2,
-                p_out_id_persona    => v_id_persona
-            );
-    END;
+    -- sp_registrar_persona implementa internamente el patrón find-or-create,
+    -- por lo que no es necesario buscar la persona previamente de forma manual.
+    sp_registrar_persona(
+        p_numero_documento  => p_dni,
+        p_id_tipo_documento => p_id_tipo_documento,
+        p_id_municipio      => p_id_municipio,
+        p_direccion         => p_direccion,
+        p_telefono          => p_telefono,
+        p_email             => p_email,
+        p_es_juridica       => p_es_juridica,
+        p_nombre            => p_nombre,
+        p_apellido1         => p_apellido1,
+        p_apellido2         => p_apellido2,
+        p_razon_social      => p_razon_social,
+        p_out_id_persona    => v_id_persona
+    );
 
     -- Buscar o crear titular
     BEGIN
